@@ -1,0 +1,57 @@
+[
+  {
+    "account_id": "A001",
+    "org_name": "Salesforce",
+    "domain": "salesforce.com",
+    "org_bio": "Global leader in customer relationship management (CRM) software.",
+    "industry": "SaaS",
+    "mrr": 12500,
+    "renewal_date": "2025-04-10",
+    "owner_name": "Bret Taylor",
+    "owner_email": "bret.taylor@salesforce.test"
+  },
+  {
+    "account_id": "A002",
+    "org_name": "FedEx",
+    "domain": "fedex.com",
+    "org_bio": "Worldwide courier delivery services company providing supply chain management solutions.",
+    "industry": "Logistics",
+    "mrr": 3800,
+    "renewal_date": "2025-06-02",
+    "owner_name": "Raj Subramaniam",
+    "owner_email": "raj.subramaniam@fedex.test"
+  },
+  {
+    "account_id": "A003",
+    "org_name": "Target",
+    "domain": "target.com",
+    "org_bio": "Major retail corporation operating thousands of stores and a leading online marketplace.",
+    "industry": "Retail",
+    "mrr": 7200,
+    "renewal_date": "2025-03-20",
+    "owner_name": "Brian Cornell",
+    "owner_email": "brian.cornell@target.test"
+  },
+  {
+    "account_id": "A004",
+    "org_name": "Latham & Watkins",
+    "domain": "lw.com",
+    "org_bio": "One of the largest law firms globally providing legal services to enterprises.",
+    "industry": "Legal",
+    "mrr": 2100,
+    "renewal_date": "2025-08-19",
+    "owner_name": "Richard Trobman",
+    "owner_email": "richard.trobman@lw.test"
+  },
+  {
+    "account_id": "A005",
+    "org_name": "Boeing",
+    "domain": "boeing.com",
+    "org_bio": "Leading manufacturer of commercial airplanes, defense, space and security systems.",
+    "industry": "Manufacturing",
+    "mrr": 5400,
+    "renewal_date": "2025-02-15",
+    "owner_name": "David Calhoun",
+    "owner_email": "david.calhoun@boeing.test"
+  }
+]

@@ -1,0 +1,54 @@
+{
+    "type": "object",
+    "title": "Response Format",
+    "required": [],
+    "properties": {
+        "account_id": {
+            "type": "string"
+        },
+        "risk_score": {
+            "type": "number"
+        },
+        "success_metrics": {
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "boolean"
+                    },
+                    {
+                        "type": "object"
+                    }
+                ]
+            }
+        },
+        "supporting_evidence": {
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "boolean"
+                    },
+                    {
+                        "type": "object"
+                    }
+                ]
+            }
+        },
+        "churn_risk_classification": {
+            "type": "string"
+        }
+    }
+}

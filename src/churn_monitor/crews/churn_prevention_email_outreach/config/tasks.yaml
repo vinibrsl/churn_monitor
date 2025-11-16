@@ -1,0 +1,50 @@
+---
+develop_retention_strategy:
+  description: |-
+    Create a comprehensive retention strategy for a customer based on the following data:
+    - Churn report
+    - Risk score
+    - Success metrics
+    - Situation overview
+    - Supporting evidence
+    - Churn risk classification
+
+    Account information:
+    {account_information}
+
+    Churn report:
+    {churn_report}
+
+  expected_output: |-
+    A detailed retention strategy document in markdown format that includes:
+      - Risk assessment summary analyzing risk score and churn risk classification
+      - Root cause analysis using supporting evidence
+      - Customer-specific intervention tactics based on risk level
+      - Personalized value propositions aligned with the customer's success metrics
+      - Communication cadence and escalation path appropriate for churn risk classification
+      - Success metrics to measure intervention effectiveness
+      - Implementation timeline with priorities based on situation overview
+      - Backup strategies if the primary approach does not work
+  agent: customer_retention_strategist
+draft_personalized_outreach_email:
+  description: |-
+    Based on the retention strategy, draft a personalized outreach email for the
+    customer that strategically addresses the customer's specific needs and
+    goals.
+
+    Account information:
+    {account_information}
+
+  expected_output: |-
+    A complete, ready-to-send personalized email in markdown format that includes:
+    - Compelling subject line reflecting the customer's churn risk classification
+    - Personalized greeting for the customer
+    - Connection to the customer's success metrics and goals
+    - Addressing specific concerns from supporting evidence
+    - Solutions and support offerings aligned with retention strategy
+    - Clear call-to-action with next steps appropriate for risk score level
+    - Professional signature from company name
+    - Email should be 200-400 words, genuine, and strategy-driven
+  agent: email_outreach_specialist
+  context:
+  - develop_retention_strategy

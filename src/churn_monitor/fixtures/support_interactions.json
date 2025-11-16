@@ -1,0 +1,289 @@
+[
+  {
+    "ticket_id": "T1001",
+    "account_id": "A001",
+    "created_at": "2025-01-03T09:41:13",
+    "sender": "customer",
+    "message": "The main dashboard takes 30+ seconds to load and it's blocking our reporting workflow."
+  },
+  {
+    "ticket_id": "T1001",
+    "account_id": "A001",
+    "created_at": "2025-01-03T10:13:09",
+    "sender": "agent",
+    "message": "Thanks for reaching out—checking system performance now and looping in engineering."
+  },
+  {
+    "ticket_id": "T1001",
+    "account_id": "A001",
+    "created_at": "2025-01-03T11:02:31",
+    "sender": "customer",
+    "message": "Appreciate the quick reply, but this has been happening all morning. Any ETA?"
+  },
+  {
+    "ticket_id": "T1001",
+    "account_id": "A001",
+    "created_at": "2025-01-03T14:27:15",
+    "sender": "agent",
+    "message": "We found a slow background job and deployed a fix. You should see faster load times over the next hour."
+  },
+  {
+    "ticket_id": "T1001",
+    "account_id": "A001",
+    "created_at": "2025-01-03T17:42:02",
+    "sender": "customer",
+    "message": "Dashboard is much faster now. Thanks for getting this sorted."
+  },
+  {
+    "ticket_id": "T1002",
+    "account_id": "A001",
+    "created_at": "2025-01-12T08:12:44",
+    "sender": "customer",
+    "message": "Our backend is suddenly getting 401 errors from your API. Nothing changed on our side."
+  },
+  {
+    "ticket_id": "T1002",
+    "account_id": "A001",
+    "created_at": "2025-01-12T09:05:05",
+    "sender": "agent",
+    "message": "We’ve reset your API key and corrected an issue on our end. Please try again."
+  },
+  {
+    "ticket_id": "T1002",
+    "account_id": "A001",
+    "created_at": "2025-01-12T09:12:54",
+    "sender": "customer",
+    "message": "Calls are going through again. Please let us know if this was a one-off or something we should watch for."
+  },
+  {
+    "ticket_id": "T1002",
+    "account_id": "A001",
+    "created_at": "2025-01-12T10:03:41",
+    "sender": "agent",
+    "message": "This was due to a faulty key rotation. It’s fully rolled back and monitored now."
+  },
+  {
+    "ticket_id": "T1002",
+    "account_id": "A001",
+    "created_at": "2025-01-12T10:18:09",
+    "sender": "customer",
+    "message": "Got it. Thanks for the transparency."
+  },
+  {
+    "ticket_id": "T2001",
+    "account_id": "A002",
+    "created_at": "2025-01-08T15:47:19",
+    "sender": "customer",
+    "message": "It would help our ops team a lot if your system auto-selected carriers based on our history."
+  },
+  {
+    "ticket_id": "T2001",
+    "account_id": "A002",
+    "created_at": "2025-01-08T16:21:42",
+    "sender": "agent",
+    "message": "Great suggestion—adding this to our feature backlog and sharing with product."
+  },
+  {
+    "ticket_id": "T2001",
+    "account_id": "A002",
+    "created_at": "2025-01-09T09:10:02",
+    "sender": "customer",
+    "message": "Thanks for considering it. Not urgent, but would be very useful."
+  },
+  {
+    "ticket_id": "T2001",
+    "account_id": "A002",
+    "created_at": "2025-01-20T11:32:17",
+    "sender": "agent",
+    "message": "Quick update: the request is in review but not scheduled yet. We’ll reach out if it’s prioritized."
+  },
+  {
+    "ticket_id": "T3001",
+    "account_id": "A003",
+    "created_at": "2025-01-02T13:09:35",
+    "sender": "customer",
+    "message": "Some stores aren't syncing inventory and local managers are escalating internally."
+  },
+  {
+    "ticket_id": "T3001",
+    "account_id": "A003",
+    "created_at": "2025-01-02T14:01:00",
+    "sender": "agent",
+    "message": "Sorry for the disruption—can you share which locations are affected so we can dig in?"
+  },
+  {
+    "ticket_id": "T3001",
+    "account_id": "A003",
+    "created_at": "2025-01-02T14:20:20",
+    "sender": "customer",
+    "message": "Brookline and Lakeside for sure, possibly Hillcrest as well."
+  },
+  {
+    "ticket_id": "T3001",
+    "account_id": "A003",
+    "created_at": "2025-01-02T15:10:09",
+    "sender": "agent",
+    "message": "We found a stuck sync worker and restarted it. You should see data catching up shortly."
+  },
+  {
+    "ticket_id": "T3001",
+    "account_id": "A003",
+    "created_at": "2025-01-03T08:42:00",
+    "sender": "customer",
+    "message": "Numbers are still off this morning. This is causing some serious headaches."
+  },
+  {
+    "ticket_id": "T3001",
+    "account_id": "A003",
+    "created_at": "2025-01-03T12:15:44",
+    "sender": "agent",
+    "message": "We’ve pushed a patch to fix the underlying bug. The next sync should correct the inventory."
+  },
+  {
+    "ticket_id": "T3001",
+    "account_id": "A003",
+    "created_at": "2025-01-04T10:01:12",
+    "sender": "customer",
+    "message": "Looks accurate now. Thanks, but this caused a lot of noise on our side—please keep an eye on it."
+  },
+  {
+    "ticket_id": "T3002",
+    "account_id": "A003",
+    "created_at": "2025-01-14T11:29:53",
+    "sender": "customer",
+    "message": "Revenue totals in the weekly report seem wrong again and accounting is flagging it."
+  },
+  {
+    "ticket_id": "T3002",
+    "account_id": "A003",
+    "created_at": "2025-01-14T12:05:14",
+    "sender": "agent",
+    "message": "Thanks for flagging—can you confirm which report and date range?"
+  },
+  {
+    "ticket_id": "T3002",
+    "account_id": "A003",
+    "created_at": "2025-01-14T12:12:39",
+    "sender": "customer",
+    "message": "\"Weekly Sales Overview\" for Jan 1–7."
+  },
+  {
+    "ticket_id": "T3002",
+    "account_id": "A003",
+    "created_at": "2025-01-14T13:22:41",
+    "sender": "agent",
+    "message": "We’ve identified a failed aggregation job and are re-running it now."
+  },
+  {
+    "ticket_id": "T3002",
+    "account_id": "A003",
+    "created_at": "2025-01-14T16:10:28",
+    "sender": "agent",
+    "message": "The report totals have been recalculated and updated. Let us know if anything still looks off."
+  },
+  {
+    "ticket_id": "T3002",
+    "account_id": "A003",
+    "created_at": "2025-01-15T09:00:02",
+    "sender": "customer",
+    "message": ""
+  },
+  {
+    "ticket_id": "T4001",
+    "account_id": "A005",
+    "created_at": "2025-01-10T10:08:19",
+    "sender": "customer",
+    "message": "New users can access admin settings—this is a serious security issue for us."
+  },
+  {
+    "ticket_id": "T4001",
+    "account_id": "A005",
+    "created_at": "2025-01-10T10:52:01",
+    "sender": "agent",
+    "message": "We’re treating this as high priority and have escalated to engineering."
+  },
+  {
+    "ticket_id": "T4001",
+    "account_id": "A005",
+    "created_at": "2025-01-10T11:43:12",
+    "sender": "agent",
+    "message": "We’ve temporarily restricted admin access while we implement a permanent fix."
+  },
+  {
+    "ticket_id": "T4001",
+    "account_id": "A005",
+    "created_at": "2025-01-10T13:20:34",
+    "sender": "customer",
+    "message": "Thanks for the quick reaction. Please confirm once the permanent fix is in place."
+  },
+  {
+    "ticket_id": "T4001",
+    "account_id": "A005",
+    "created_at": "2025-01-12T09:15:44",
+    "sender": "agent",
+    "message": "The permanent fix has been deployed and verified. Only designated admins can access those settings now."
+  },
+  {
+    "ticket_id": "T4001",
+    "account_id": "A005",
+    "created_at": "2025-01-12T15:01:20",
+    "sender": "customer",
+    "message": "Permissions look correct now. We'll keep monitoring, but this addresses our main concern."
+  },
+  {
+    "ticket_id": "T5002",
+    "account_id": "A004",
+    "created_at": "2025-02-17T17:34:22",
+    "sender": "customer",
+    "message": "Could you send last year’s contract? Our legal team can’t locate it."
+  },
+  {
+    "ticket_id": "T5002",
+    "account_id": "A004",
+    "created_at": "2025-02-17T17:48:13",
+    "sender": "agent",
+    "message": "Sharing a secure download link to the signed contract now."
+  },
+  {
+    "ticket_id": "T5002",
+    "account_id": "A004",
+    "created_at": "2025-02-17T17:54:07",
+    "sender": "customer",
+    "message": "Got it, thanks for the quick turnaround."
+  },
+  {
+    "ticket_id": "T5103",
+    "account_id": "A002",
+    "created_at": "2025-03-04T09:11:55",
+    "sender": "customer",
+    "message": "Our tracking page isn’t updating and our customers are complaining about missing status updates."
+  },
+  {
+    "ticket_id": "T5103",
+    "account_id": "A002",
+    "created_at": "2025-03-04T09:49:31",
+    "sender": "agent",
+    "message": "We’re investigating—early signs point to a delay in the sync job."
+  },
+  {
+    "ticket_id": "T5103",
+    "account_id": "A002",
+    "created_at": "2025-03-04T10:15:42",
+    "sender": "customer",
+    "message": "We’ve had to field several angry calls already. Please give us a realistic ETA."
+  },
+  {
+    "ticket_id": "T5103",
+    "account_id": "A002",
+    "created_at": "2025-03-04T13:42:09",
+    "sender": "agent",
+    "message": "Queue backlog has been cleared and updates are flowing again. There may still be a slight delay for older shipments."
+  },
+  {
+    "ticket_id": "T5103",
+    "account_id": "A002",
+    "created_at": "2025-03-04T17:02:11",
+    "sender": "customer",
+    "message": "Not perfect, but good enough for now. Please work on making this more resilient."
+  }
+]

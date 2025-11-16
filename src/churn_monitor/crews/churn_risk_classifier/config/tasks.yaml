@@ -1,0 +1,76 @@
+---
+analyze_support_tickets:
+  description: |-
+    Analyze the support ticket data for account {account_id} to identify key risk indicators:
+
+    1. **Ticket Frequency**: Count total tickets and frequency over time
+    2. **Issue Severity**: Categorize issues by impact (critical, high, medium, low)
+    3. **Resolution Times**: Calculate average time between customer reports and agent responses, and time to resolution
+    4. **Issue Types**: Identify recurring problem categories (performance, API, bugs, etc.)
+    5. **Customer Sentiment**: Analyze customer tone and satisfaction in communications
+    6. **Issue Resolution Quality**: Assess whether issues were resolved satisfactorily
+    7. **Escalation Patterns**: Look for signs of frustration or repeated issues
+
+    Input data format: {support_tickets_data}
+    Additional context: {additional_data}
+  expected_output: |-
+    A detailed support ticket analysis report in markdown format containing:
+
+    - **Executive Summary**: Key findings and risk indicators
+    - **Ticket Metrics**: Total tickets, frequency, response times
+    - **Issue Analysis**: Problem categories, severity distribution, recurring themes
+    - **Customer Sentiment**: Communication tone analysis
+    - **Risk Indicators**: Specific patterns that suggest churn risk
+    - **Supporting Data**: Key statistics and examples from ticket conversations
+  agent: support_ticket_data_analyst
+analyze_account_profile:
+  description: |-
+    Analyze the account profile data for account {account_id} to assess churn risk factors:
+
+    1. **Account Demographics**: Company size, industry, domain analysis
+    2. **Contract Details**: Revenue, contract dates, payment history
+    3. **Account Health**: Age, engagement indicators, usage patterns
+    4. **Business Context**: Company description, key contacts, decision maker info
+    5. **Financial Risk**: Revenue size, contract renewal dates, payment patterns
+    6. **Relationship Health**: Primary contact responsiveness and engagement
+
+    Input data format: {account_data}
+    Additional context: {additional_data}
+  expected_output: "A comprehensive account profile analysis report in markdown format
+    containing:\n\n- **Account Overview**: Basic company and contract information\n-
+    **Risk Assessment**: Key account characteristics that indicate churn risk\n- **Financial
+    Profile**: Revenue contribution and contract health\n- **Relationship Quality**:
+    Contact engagement and communication patterns  \n- **Business Context**: Industry
+    factors and company stability indicators\n- **Account Health Score**: Overall
+    account health assessment with supporting metrics"
+  agent: account_profile_analyzer
+classify_churn_risk:
+  description: |-
+    Based on the support ticket analysis and account profile assessment, classify account {account_id} into one of three churn risk categories:
+
+    **HIGH RISK**: Immediate intervention required
+    **MEDIUM RISK**: Monitor closely and consider proactive outreach
+    **LOW RISK**: Standard monitoring and engagement
+
+    Consider these factors:
+    - Support ticket patterns and customer satisfaction
+    - Account health and engagement metrics
+    - Financial and contract risk factors
+    - Overall relationship quality
+    - Industry and company stability
+
+    Provide detailed reasoning for the classification and specific recommended actions for customer success teams.
+  expected_output: |-
+    A final churn risk classification report in markdown format containing:
+
+    - **Churn Risk Classification**: HIGH/MEDIUM/LOW with confidence level
+    - **Risk Score**: Numerical score (1-10 scale) with breakdown by category
+    - **Key Risk Factors**: Primary indicators driving the classification
+    - **Supporting Evidence**: Specific data points from tickets and account profile
+    - **Recommended Actions**: Concrete next steps for customer success team
+    - **Timeline**: Urgency and suggested follow-up schedule
+    - **Success Metrics**: KPIs to track improvement
+  agent: churn_risk_classifier
+  context:
+  - analyze_support_tickets
+  - analyze_account_profile

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Risk Report - Review Before Sending</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Churn Risk Report</h1>
+            <p class="text-sm text-gray-600 mt-1">
+                {{ accounts|length }} account{{ 's' if accounts|length != 1 else '' }} •
+                {{ emails_by_account|length }} email{{ 's' if emails_by_account|length != 1 else '' }} to review
+            </p>
+        </div>
+
+        <!-- Account List -->
+        {% for account in accounts %}
+        <div class="bg-white border border-gray-200 mb-6">
+            <!-- Top Bar: Account Name + Risk Badge -->
+            <div class="bg-gray-50 px-6 py-3 flex items-center justify-between border-b">
+                <div>
+                    <h2 class="font-semibold text-gray-900">{{ account.org_name or account.account_id }}</h2>
+                    <div class="text-xs text-gray-500 mt-0.5">
+                        {{ account.account_id }}
+                        {% if account.owner_name %} • {{ account.owner_name }}{% endif %}
+                        {% if account.industry %} • {{ account.industry }}{% endif %}
+                        {% if account.mrr %} • ${{ "{:,}".format(account.mrr) }}/mo{% endif %}
+                    </div>
+                </div>
+                {% if account.churn_report %}
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <div class="text-xs text-gray-500">Risk Score</div>
+                        <div class="text-lg font-bold text-gray-900">{{ account.churn_report.risk_score }}/10</div>
+                    </div>
+                    <span class="text-xs font-semibold px-2.5 py-1 border
+                        {% if account.churn_report.churn_risk_classification|lower == 'high' %}border-red-600 text-red-600
+                        {% elif account.churn_report.churn_risk_classification|lower == 'medium' %}border-yellow-600 text-yellow-600
+                        {% else %}border-green-600 text-green-600{% endif %}">
+                        {{ account.churn_report.churn_risk_classification|upper }}
+                    </span>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="grid md:grid-cols-2 divide-x">
+                <!-- Left Column: Analysis -->
+                <div class="p-6">
+                    {% if account.churn_report %}
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Analysis</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">{{ account.churn_report.situation_overview }}</p>
+                    {% else %}
+                    <p class="text-sm text-gray-500 italic">No analysis available</p>
+                    {% endif %}
+                </div>
+
+                <!-- Right Column: Email -->
+                <div class="p-6">
+                    {% if emails_by_account.get(account.account_id) %}
+                    {% set email = emails_by_account[account.account_id] %}
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Outreach Email</h3>
+                        <span class="text-xs text-green-600 font-medium">✓ Ready</span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-xs text-gray-500 block mb-1">Subject:</label>
+                        <input type="text"
+                               value="{{ email.email_subject }}"
+                               class="w-full text-sm font-medium text-gray-900 border border-gray-300 px-3 py-1.5 focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="border-t pt-3">
+                        <label class="text-xs text-gray-500 block mb-1">Message:</label>
+                        <textarea class="w-full text-sm text-gray-700 border border-gray-300 px-3 py-2 min-h-48 focus:outline-none focus:border-blue-500"
+                                  style="resize: vertical;">{{ email.email_content }}</textarea>
+                    </div>
+                    {% else %}
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Outreach Email</h3>
+                    <p class="text-sm text-gray-500 italic">No email prepared (low risk)</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

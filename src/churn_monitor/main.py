@@ -1,20 +1,23 @@
 #!/usr/bin/env python
 
+import os
 import toon_format as toon
 
 from crewai.flow import Flow, listen, start
-from pydantic import BaseModel, Field
-from random import randint
+from pydantic import BaseModel
+from typing import Literal
 
 from churn_monitor.crews.churn_prevention_email_outreach.crew import ChurnPreventionEmailOutreachCrew
 from churn_monitor.crews.churn_risk_classifier.crew import ChurnRiskClassifierCrew
 from churn_monitor.crm import Client
 from churn_monitor.models import Account, SupportTicket, ChurnReport, OutreachEmail
+from churn_monitor.report import generate_html_report, generate_json_report, write_report_to_file
 
 class ChurnMonitorState(BaseModel):
     accounts: list[Account] = []
     support_tickets: list[SupportTicket] = []
     outreach_emails: list[OutreachEmail] = []
+    output_format: Literal["html", "json"] = "html"
     limit: int = 1
 
 
@@ -70,76 +73,18 @@ class ChurnMonitorFlow(Flow[ChurnMonitorState]):
     def write_final_report(self):
         """
         Writes a final report with the churn risk classification and outreach
-        emails as a single HTML page with account, overview, and email.
+        emails as HTML or JSON.
         """
-        import os
+        emails_by_account = {email.account_id: email for email in self.state.outreach_emails}
+        accounts = self.state.accounts
 
-        output_dir = "reports"
-        os.makedirs(output_dir, exist_ok=True)
-        html_path = os.path.join(output_dir, "churn_risk_report.html")
+        if self.state.output_format == "html":
+            content = generate_html_report(accounts, emails_by_account)
+        elif self.state.output_format == "json":
+            content = generate_json_report(accounts, emails_by_account)
 
-        html = [
-            "<html>",
-            "<head>",
-            "<title>Churn Risk Classification and Outreach Emails</title>",
-            "<style>",
-            "body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; }",
-            "h1 { color: #1A5276; }",
-            "h2 { color: #21618C; border-bottom: 1px solid #aaa; padding-bottom: 2px; }",
-            ".account-block { border: 1px solid #dee2e6; border-radius: 5px; background: #f6f9fa; margin: 2em 0; padding: 1.2em 2em; }",
-            ".email { background: #fff; border: 1px solid #bbb; border-radius: 4px; margin: 1em 0 0 0; padding: 1em; }",
-            ".overview { font-style: italic; color: #444; }",
-            ".not-sent { color: #b22222; font-weight: bold; }",
-            "</style>",
-            "</head>",
-            "<body>",
-            "<h1>Churn Risk Classification and Outreach Emails</h1>"
-        ]
-
-        emails_by_account = {email.account_id: email for email in getattr(self.state, 'outreach_emails', [])}
-
-        for account in getattr(self.state, 'accounts', []):
-            churn_report = getattr(account, "churn_report", None)
-            email = emails_by_account.get(account.account_id)
-            html.append('<div class="account-block">')
-            # Account basic info
-            html.append(f"<h2>Account: {getattr(account, 'org_name', account.account_id)}</h2>")
-            html.append(f"<strong>Account ID:</strong> {account.account_id}<br>")
-            if hasattr(account, "industry"):
-                html.append(f"<strong>Industry:</strong> {account.industry}<br>")
-            if hasattr(account, "owner_name"):
-                html.append(f"<strong>Owner:</strong> {account.owner_name}<br>")
-            if hasattr(account, "mrr"):
-                html.append(f"<strong>MRR:</strong> ${account.mrr:,}<br>")
-            # Churn overview and score/classification
-            if churn_report:
-                html.append("<div class='overview'>")
-                html.append(f"<strong>Churn Score:</strong> {churn_report.risk_score} &mdash; ")
-                html.append(f"<strong>Classification:</strong> {churn_report.churn_risk_classification.title()}<br>")
-                html.append(f"<strong>Overview:</strong> {churn_report.situation_overview}")
-                html.append("</div>")
-            else:
-                html.append("<div class='not-sent'>No churn report available for this account.</div>")
-
-            # Outreach email if sent
-            if email:
-                html.append("<div class='email'>")
-                html.append(f"<strong>Email Subject:</strong> {email.email_subject}<br><br>")
-                html.append(f"{email.email_content}")
-                html.append("</div>")
-            else:
-                html.append("<div class='not-sent'>No outreach email sent for this account.</div>")
-
-            html.append("</div>")  # end account-block
-
-        html.append("</body></html>")
-
-        with open(html_path, "w", encoding="utf-8") as f:
-            f.write("\n".join(html))
-
-        print(f"HTML report written to '{html_path}'")
-
-
+        write_report_to_file(content, self.state.output_format)
+        return content
 
 def kickoff():
     churn_monitor_flow = ChurnMonitorFlow()

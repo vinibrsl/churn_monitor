@@ -1,75 +1,100 @@
 ---
 analyze_support_tickets:
   description: |-
-    Analyze the support ticket data for account {account_id} to identify key risk indicators:
+    Look through the support tickets for account {account_id} and find the answer to ONE question:
 
-    1. **Ticket Frequency**: Count total tickets and frequency over time
-    2. **Issue Severity**: Categorize issues by impact (critical, high, medium, low)
-    3. **Resolution Times**: Calculate average time between customer reports and agent responses, and time to resolution
-    4. **Issue Types**: Identify recurring problem categories (performance, API, bugs, etc.)
-    5. **Customer Sentiment**: Analyze customer tone and satisfaction in communications
-    6. **Issue Resolution Quality**: Assess whether issues were resolved satisfactorily
-    7. **Escalation Patterns**: Look for signs of frustration or repeated issues
+    What is the ONE issue that keeps coming up that's clearly frustrating this customer?
+
+    Look for:
+    - Same problem reported multiple times (even if worded differently)
+    - Increasing frustration in their messages
+    - Long resolution times or issues marked resolved but reopened
+    - Problems that directly impact their core business
+
+    Ignore one-off questions or minor issues. What's the PATTERN that matters?
 
     Input data format: {support_tickets_data}
     Additional context: {additional_data}
   expected_output: |-
-    A detailed support ticket analysis report in markdown format containing:
+    A brief analysis (3-5 sentences) that answers:
 
-    - **Executive Summary**: Key findings and risk indicators
-    - **Ticket Metrics**: Total tickets, frequency, response times
-    - **Issue Analysis**: Problem categories, severity distribution, recurring themes
-    - **Customer Sentiment**: Communication tone analysis
-    - **Risk Indicators**: Specific patterns that suggest churn risk
-    - **Supporting Data**: Key statistics and examples from ticket conversations
+    1. What is the core recurring problem? (Be specific: "tracking page errors" not "technical issues")
+    2. How many times has it come up and over what period?
+    3. What's the customer's tone about it? (frustrated, angry, or still patient?)
+    4. Has it been actually fixed or just patched over?
+
+    Example: "The tracking page has been broken for 3 weeks (Tickets T5103, T5201, T5289).
+    Customer is clearly frustrated—their last message said 'this is unacceptable for our business.'
+    Each time support has said 'we'll look into it' but there's no evidence of a real fix."
+
+    DO NOT write: comprehensive reports, ticket metrics tables, or category breakdowns.
   agent: support_ticket_data_analyst
 analyze_account_profile:
   description: |-
-    Analyze the account profile data for account {account_id} to assess churn risk factors:
+    Look at account {account_id}'s profile and answer: Is there anything about THIS
+    customer that makes their problems more urgent?
 
-    1. **Account Demographics**: Company size, industry, domain analysis
-    2. **Contract Details**: Revenue, contract dates, payment history
-    3. **Account Health**: Age, engagement indicators, usage patterns
-    4. **Business Context**: Company description, key contacts, decision maker info
-    5. **Financial Risk**: Revenue size, contract renewal dates, payment patterns
-    6. **Relationship Health**: Primary contact responsiveness and engagement
+    Check for:
+    - Contract renewal coming up soon (within 3 months = urgent)
+    - High revenue account (over $50k/year = important)
+    - Industry where this problem is critical (e.g., logistics company with tracking issues)
+    - Recent reduction in engagement or usage
+
+    Don't force urgency if it's not there. If they're a low-revenue account with 18 months
+    left on contract, just say that.
 
     Input data format: {account_data}
     Additional context: {additional_data}
-  expected_output: "A comprehensive account profile analysis report in markdown format
-    containing:\n\n- **Account Overview**: Basic company and contract information\n-
-    **Risk Assessment**: Key account characteristics that indicate churn risk\n- **Financial
-    Profile**: Revenue contribution and contract health\n- **Relationship Quality**:
-    Contact engagement and communication patterns  \n- **Business Context**: Industry
-    factors and company stability indicators\n- **Account Health Score**: Overall
-    account health assessment with supporting metrics"
+  expected_output: |-
+    A brief context assessment (2-3 sentences) covering:
+
+    1. Is there timing pressure? (contract renewal soon?)
+    2. Is this a high-value account? (revenue amount)
+    3. Does their industry/business make this problem more critical?
+
+    Example 1 (urgent): "FedEx is a $150k/year account with contract renewal in 6 weeks.
+    They're a logistics company, so tracking reliability is existential for them."
+
+    Example 2 (not urgent): "Small account ($12k/year) with renewal 14 months away.
+    Standard SaaS customer, no special industry considerations."
+
+    DO NOT write: comprehensive profiles, health scores, or engagement metrics tables.
   agent: account_profile_analyzer
 classify_churn_risk:
   description: |-
-    Based on the support ticket analysis and account profile assessment, classify account {account_id} into one of three churn risk categories:
+    You've got the ticket analysis and account context. Now make the call: How serious is this?
 
-    **HIGH RISK**: Immediate intervention required
-    **MEDIUM RISK**: Monitor closely and consider proactive outreach
-    **LOW RISK**: Standard monitoring and engagement
+    Decision framework:
+    - **HIGH**: Serious unresolved problem + (high value OR renewal soon OR very frustrated customer)
+    - **MEDIUM**: Recurring problem but not urgent, OR frustrated customer but low stakes
+    - **LOW**: Minor issues only, happy customer, or problems already being fixed
 
-    Consider these factors:
-    - Support ticket patterns and customer satisfaction
-    - Account health and engagement metrics
-    - Financial and contract risk factors
-    - Overall relationship quality
-    - Industry and company stability
+    Be honest. Don't upgrade to HIGH just because you can. But don't downplay real problems either.
 
-    Provide detailed reasoning for the classification and specific recommended actions for customer success teams.
   expected_output: |-
-    A final churn risk classification report in markdown format containing:
+    A concise risk assessment that includes:
 
-    - **Churn Risk Classification**: HIGH/MEDIUM/LOW with confidence level
-    - **Risk Score**: Numerical score (1-10 scale) with breakdown by category
-    - **Key Risk Factors**: Primary indicators driving the classification
-    - **Supporting Evidence**: Specific data points from tickets and account profile
-    - **Recommended Actions**: Concrete next steps for customer success team
-    - **Timeline**: Urgency and suggested follow-up schedule
-    - **Success Metrics**: KPIs to track improvement
+    1. **Risk Level**: HIGH, MEDIUM, or LOW (pick one)
+    2. **Risk Score**: 1-10 number
+    3. **One-Sentence Reason**: Why this rating? What's the core issue?
+    4. **Recommended Action**: What should we do THIS WEEK? (one specific action)
+    5. **Supporting Evidence**: 1-2 specific data points (ticket IDs, revenue, dates)
+
+    Example HIGH:
+    "HIGH risk (9/10). Tracking page has been broken for 3 weeks with no real fix (T5103, T5201),
+    customer is frustrated, and they're a $150k logistics account renewing in 6 weeks. Get an
+    engineer on a call THIS WEEK to fix it permanently."
+
+    Example MEDIUM:
+    "MEDIUM risk (5/10). Slow API responses reported twice (T4522, T4801). Customer is patient
+    but it's affecting their workflows. Mid-size account ($45k) with 8 months to renewal. Schedule
+    performance review call next week."
+
+    Example LOW:
+    "LOW risk (2/10). One minor UI bug (T3331) already fixed. Happy customer, no patterns of concern.
+    Standard check-in next quarter is fine."
+
+    DO NOT write: comprehensive reports, multi-factor breakdowns, or lengthy action plans.
   agent: churn_risk_classifier
   context:
   - analyze_support_tickets

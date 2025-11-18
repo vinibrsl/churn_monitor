@@ -6,6 +6,10 @@ class OutreachEmail(BaseModel):
     account_id: str
     email_subject: str
     email_content: str
+    commitments: list[str] = Field(
+        ...,
+        description="Specific commitments or promises made in the email that the sender must fulfill (e.g., 'Schedule engineer call by Thursday', 'Provide root cause analysis within 48 hours').",
+    )
 
 class ChurnReport(BaseModel):
     risk_score: int = Field(

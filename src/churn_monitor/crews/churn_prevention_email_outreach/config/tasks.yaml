@@ -48,20 +48,35 @@ draft_personalized_outreach_email:
     {account_information}
 
   expected_output: |-
-    A short, natural email (50-75 words) that includes:
+    A short, natural email (50-75 words) with a list of actionable commitments:
+
+    EMAIL FORMAT:
     - Subject line: specific and relevant (e.g., "Fix for the tracking page issue")
     - Greeting: use their first name
     - Body: 2-3 short sentences acknowledging the specific problem and proposing the fix
     - Call to action: one clear next step (e.g., "Can we get on a call Thursday?")
     - Sign off: simple and warm (e.g., "Thanks, [Name]")
 
-    Example of good tone:
+    COMMITMENTS LIST:
+    - Extract ONLY the specific, actionable promises made in the email
+    - Must be things the sender can actually track and fulfill
+    - Include deadlines/timeframes mentioned (e.g., "this week", "Thursday")
+    - Keep each commitment as a single, clear action item
+
+    Example email:
     "Hi Raj, I saw the tracking page has been causing issues for your team. I'd
     like to get one of our engineers on a call with you this week to fix it
     properly—not just patch it. Does Thursday at 2pm work? Thanks, Sarah"
 
-    AVOID: long paragraphs, corporate language, listing multiple issues, promises
-    without specifics, generic statements about "commitment to excellence"
+    Example commitments for above email:
+    - "Schedule engineer call with customer by Thursday at 2pm"
+    - "Provide permanent fix for tracking page issue (not just a patch)"
+
+    AVOID IN EMAIL: long paragraphs, corporate language, listing multiple issues,
+    vague promises, generic statements about "commitment to excellence"
+
+    AVOID IN COMMITMENTS: vague items like "provide excellent service" or
+    "ensure customer satisfaction"—only concrete, measurable actions
   agent: email_outreach_specialist
   context:
   - develop_retention_strategy

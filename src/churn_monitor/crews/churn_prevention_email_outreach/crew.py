@@ -31,7 +31,7 @@ class ChurnPreventionEmailOutreachCrew:
 
             max_execution_time=None,
             llm=LLM(
-                model="openai/gpt-4o",
+                model="anthropic/claude-sonnet-4-5",
                 temperature=0.7,
             ),
 
@@ -54,7 +54,7 @@ class ChurnPreventionEmailOutreachCrew:
 
             max_execution_time=None,
             llm=LLM(
-                model="openai/gpt-4o",
+                model="anthropic/claude-sonnet-4-5",
                 temperature=0.7,
             ),
 

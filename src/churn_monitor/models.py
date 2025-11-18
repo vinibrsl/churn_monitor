@@ -32,7 +32,7 @@ class ChurnReport(BaseModel):
     )
     situation_overview: str = Field(
         ...,
-        description="Brief narrative summary explaining the current account context and risk factors.",
+        description="Brief narrative summary explaining the current account context and risk factors. CRITICAL: This is CUSTOMER-FACING text. Focus on THEIR business impact and technical issues. NEVER include our internal revenue figures, financial exposure, or amounts 'at risk' for our company.",
     )
 
 class Account(BaseModel):

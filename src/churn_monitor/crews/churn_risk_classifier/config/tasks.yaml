@@ -1,100 +1,208 @@
 ---
 analyze_support_tickets:
   description: |-
-    Look through the support tickets for account {account_id} and find the answer to ONE question:
+    Analyze support tickets for account {account_id} as STRATEGIC INTELLIGENCE, not just
+    technical problems. Answer these questions:
 
-    What is the ONE issue that keeps coming up that's clearly frustrating this customer?
+    1. **Engagement Pattern**: WHO is reaching out? Same champion consistently or different
+       people? New voices appearing = potential champion departure/disengagement.
 
-    Look for:
-    - Same problem reported multiple times (even if worded differently)
-    - Increasing frustration in their messages
-    - Long resolution times or issues marked resolved but reopened
-    - Problems that directly impact their core business
+    2. **Business Value Signals**: What LANGUAGE do they use? Do they mention business
+       impact ("costing us customers") or just technical details? Are they connecting
+       your product to their success or just reporting issues?
 
-    Ignore one-off questions or minor issues. What's the PATTERN that matters?
+    3. **Relationship Health**: What's the TONE trajectory? Collaborative problem-solving
+       or combative blame? Are they getting more frustrated over time?
+
+    4. **Communication Quality**: Are they providing context and detail (invested) or
+       sending terse complaints (checked out)? Fast responses = engaged, slow = warning.
+
+    5. **Technical Issue (secondary)**: Yes, what's the actual recurring problem? But
+       frame it in terms of THEIR business impact, not technical symptoms.
+
+    CRITICAL: Zero tickets can be BAD (silent churn, gave up) or GOOD (everything works).
+    Read between the lines.
 
     Input data format: {support_tickets_data}
     Additional context: {additional_data}
   expected_output: |-
-    A brief analysis (3-5 sentences) that answers:
+    A strategic intelligence brief (4-6 sentences) that covers:
 
-    1. What is the core recurring problem? (Be specific: "tracking page errors" not "technical issues")
-    2. How many times has it come up and over what period?
-    3. What's the customer's tone about it? (frustrated, angry, or still patient?)
-    4. Has it been actually fixed or just patched over?
+    1. **Engagement health**: Who's reaching out and what does that signal?
+    2. **Business value realization**: Do they connect your product to their success?
+    3. **Relationship trajectory**: Getting better, stable, or deteriorating?
+    4. **Core issue (if any)**: What's the problem and what's the business impact?
 
-    Example: "The tracking page has been broken for 3 weeks (Tickets T5103, T5201, T5289).
-    Customer is clearly frustrated—their last message said 'this is unacceptable for our business.'
-    Each time support has said 'we'll look into it' but there's no evidence of a real fix."
+    Example STRATEGIC output:
+    "Sarah (their COO) was submitting tickets monthly mentioning 'business impact' and
+    'our team's efficiency.' Last 2 months, it's been Jake from IT with terse technical
+    complaints—no mention of business value. The tracking page issue (T5103, T5201) has
+    come up 3x in 3 weeks. Language shifted from 'can you help fix' to 'this is unacceptable.'
+    Pattern shows champion disengagement + technical frustration + loss of business value narrative."
 
-    DO NOT write: comprehensive reports, ticket metrics tables, or category breakdowns.
+    Example for LOW ACTIVITY:
+    "Only 1 ticket in 90 days—a minor UI question resolved same day. But this is a SaaS
+    company that should be power users. Either they're not using the product much (silent
+    churn risk) or they've figured it out without us (good, but we're not building relationship)."
+
+    DO NOT write: ticket-by-ticket summaries, technical troubleshooting, or generic "customer
+    is frustrated" statements without strategic context.
   agent: support_ticket_data_analyst
 analyze_account_profile:
   description: |-
-    Look at account {account_id}'s profile and answer: Is there anything about THIS
-    customer that makes their problems more urgent?
+    Analyze account {account_id} to calculate financial exposure, assess strategic fit,
+    and identify industry-specific criticality. Think like a CFO + strategic CSM.
 
-    Check for:
-    - Contract renewal coming up soon (within 3 months = urgent)
-    - High revenue account (over $50k/year = important)
-    - Industry where this problem is critical (e.g., logistics company with tracking issues)
-    - Recent reduction in engagement or usage
+    **Calculate Financial Risk**:
+    - MRR × months to renewal = exposure at risk
+    - High MRR (>$50k/year) = executive escalation needed
+    - Near renewal (<3 months) = multiply urgency by 3x
 
-    Don't force urgency if it's not there. If they're a low-revenue account with 18 months
-    left on contract, just say that.
+    **Assess Industry-Specific Criticality**:
+    - Logistics + tracking issues = existential (they lose customers)
+    - Legal + document search problems = can't do their job
+    - Retail + slow dashboard = losing deals in real-time
+    - SaaS + API issues = their customers are affected (cascading impact)
+    - Manufacturing + data accuracy = safety/compliance risk
+
+    **Evaluate Strategic Fit Signals**:
+    - What does their org_bio reveal about their core business?
+    - Are we solving their main problem or a side project?
+    - Who is the owner_name? C-level = political capital, manager = less leverage
+    - Domain/company prestige = logo value, reference customer, expansion potential
+
+    **Calculate Priority Score**: Not all $50k accounts are equal. A $50k logistics company
+    with tracking issues + 2 months to renewal is MUCH higher priority than a $50k account
+    with a minor UI bug and 10 months left.
 
     Input data format: {account_data}
     Additional context: {additional_data}
   expected_output: |-
-    A brief context assessment (2-3 sentences) covering:
+    A strategic context assessment (3-4 sentences) covering:
 
-    1. Is there timing pressure? (contract renewal soon?)
-    2. Is this a high-value account? (revenue amount)
-    3. Does their industry/business make this problem more critical?
+    1. **Financial exposure**: MRR + renewal timing = dollars at risk
+    2. **Industry criticality**: Does this problem impact their core business?
+    3. **Strategic importance**: Logo value, expansion potential, reference customer?
+    4. **Contact leverage**: Who owns this account internally (signals power)?
 
-    Example 1 (urgent): "FedEx is a $150k/year account with contract renewal in 6 weeks.
-    They're a logistics company, so tracking reliability is existential for them."
+    Example STRATEGIC output:
+    "Salesforce is a $150k/year logo account (renewal in 4 months = $50k at risk).
+    Owner is Bret Taylor (Chairman) = C-level relationship with political capital.
+    They're SaaS, so dashboard performance issues affect THEIR customer demos—cascading
+    business impact. High logo value for our credibility. Priority: CRITICAL."
 
-    Example 2 (not urgent): "Small account ($12k/year) with renewal 14 months away.
-    Standard SaaS customer, no special industry considerations."
+    Example MEDIUM priority:
+    "Target is $86k/year retail account, renewal in 6 months. Owner is Brian Cornell (CEO)
+    = strong relationship leverage. Retail means Q4 (holiday) is make-or-break, but we're
+    in Q1 so timing is okay. Data accuracy issues affect their inventory decisions but
+    not existential yet. Priority: MEDIUM-HIGH."
 
-    DO NOT write: comprehensive profiles, health scores, or engagement metrics tables.
+    Example LOW priority (don't manufacture urgency):
+    "Latham & Watkins is $25k/year, renewal in 8 months. Mid-tier legal firm, not a
+    marquee logo. Owner is Richard Trobman (Partner, not C-level) = limited political
+    capital. Document search is important but not mission-critical. Priority: LOW."
+
+    DO NOT write: generic profiles without financial math or strategic reasoning.
   agent: account_profile_analyzer
 classify_churn_risk:
   description: |-
-    You've got the ticket analysis and account context. Now make the call: How serious is this?
+    You've got strategic intelligence from tickets and account analysis. Now make the call:
+    What's the REAL churn risk and what's driving it?
 
-    Decision framework:
-    - **HIGH**: Serious unresolved problem + (high value OR renewal soon OR very frustrated customer)
-    - **MEDIUM**: Recurring problem but not urgent, OR frustrated customer but low stakes
-    - **LOW**: Minor issues only, happy customer, or problems already being fixed
+    **Decision framework** (think multi-dimensional):
 
-    Be honest. Don't upgrade to HIGH just because you can. But don't downplay real problems either.
+    - **HIGH RISK** (8-10):
+      * Champion disengagement + technical frustration + high financial exposure
+      * Loss of business value narrative + near renewal
+      * Existential technical issue for their industry + high MRR
+      * "Silent churn" signals (no tickets but should be power users)
+
+    - **MEDIUM RISK** (4-7):
+      * Technical issues affecting business BUT good relationship OR long renewal runway
+      * High financial exposure BUT issues being addressed collaboratively
+      * Champion engaged BUT significant unresolved problems
+      * Low engagement BUT low financial stakes
+
+    - **LOW RISK** (1-3):
+      * Minor technical issues + strong champion + business value realization
+      * High engagement + collaborative problem-solving + strong strategic fit
+      * Clean technical experience + evidence they're getting business value
+
+    **Strategic thinking required**: Don't just add up problems. A $150k account with
+    a frustrated champion and 2 months to renewal is HIGH RISK even with only 1 ticket.
+    A $10k account with 10 tickets but 12 months to renewal and engaged champion is MEDIUM.
 
   expected_output: |-
-    A concise risk assessment that includes:
+    A strategic risk assessment that includes:
 
-    1. **Risk Level**: HIGH, MEDIUM, or LOW (pick one)
-    2. **Risk Score**: 1-10 number
-    3. **One-Sentence Reason**: Why this rating? What's the core issue?
-    4. **Recommended Action**: What should we do THIS WEEK? (one specific action)
-    5. **Supporting Evidence**: 1-2 specific data points (ticket IDs, revenue, dates)
+    1. **Risk Level**: HIGH, MEDIUM, or LOW
+    2. **Risk Score**: 1-10 (use full range, don't cluster at 5)
+    3. **Primary Risk Driver**: What's the MAIN factor? (champion loss, business value gap,
+       financial exposure, technical crisis, etc.)
+    4. **Strategic Action**: What do we do THIS WEEK? Must match the primary risk driver.
+    5. **Supporting Evidence**: 2-3 strategic facts (not just ticket IDs)
+    6. **Situation Overview**: CUSTOMER-FACING summary focusing on THEIR business problems
+       and technical issues. NEVER mention our internal revenue, financial exposure, or
+       dollar amounts "at risk" for our company.
 
-    Example HIGH:
-    "HIGH risk (9/10). Tracking page has been broken for 3 weeks with no real fix (T5103, T5201),
-    customer is frustrated, and they're a $150k logistics account renewing in 6 weeks. Get an
-    engineer on a call THIS WEEK to fix it permanently."
+    Example HIGH (champion disengagement):
+    "HIGH risk (9/10). Primary driver: Champion disengagement. Sarah (COO) used to submit
+    tickets with business context; now it's IT with terse complaints. Lost the business
+    value narrative. $150k account, renewal in 4 months = $50k at risk. Action: CSM needs
+    emergency QBR with Sarah THIS WEEK to rebuild relationship and understand business goals."
 
-    Example MEDIUM:
-    "MEDIUM risk (5/10). Slow API responses reported twice (T4522, T4801). Customer is patient
-    but it's affecting their workflows. Mid-size account ($45k) with 8 months to renewal. Schedule
-    performance review call next week."
+    SITUATION OVERVIEW (customer-facing): "The account is experiencing a shift in engagement
+    patterns, with technical issues affecting CRM capabilities. The change in communication
+    style and the recurring performance problems with APIs and dashboards are impacting
+    business operations. With renewal approaching, immediate attention to both technical
+    resolution and strategic alignment is necessary."
 
-    Example LOW:
-    "LOW risk (2/10). One minor UI bug (T3331) already fixed. Happy customer, no patterns of concern.
-    Standard check-in next quarter is fine."
+    Example HIGH (existential technical issue):
+    "HIGH risk (8/10). Primary driver: Existential technical failure. Tracking page breaks
+    during peak hours for a logistics company—they're losing customers. $45k/year, renewal
+    in 2 months. Despite lower MRR, industry criticality makes this critical. Action: Backend
+    team ships failover fix by Friday, followed by technical review call."
 
-    DO NOT write: comprehensive reports, multi-factor breakdowns, or lengthy action plans.
+    SITUATION OVERVIEW (customer-facing): "The tracking page reliability issues during peak
+    hours are directly impacting your logistics operations and customer experience. These
+    performance problems are affecting your core business capabilities, and addressing them
+    is a critical priority to ensure your operations run smoothly."
+
+    Example MEDIUM (technical + time):
+    "MEDIUM risk (6/10). Primary driver: Recurring technical issue with runway. Dashboard
+    performance affecting their sales demos (tickets T5103, T5289). BUT champion (Brian,
+    CEO) is engaged and collaborative. $86k retail account, 6 months to renewal = time to
+    fix. Action: Performance optimization sprint this week + weekly updates to Brian."
+
+    SITUATION OVERVIEW (customer-facing): "The dashboard performance issues are affecting
+    your sales demonstrations and team productivity. While we're working collaboratively to
+    resolve these technical challenges, the recurring nature requires focused attention to
+    ensure your business operations aren't disrupted."
+
+    Example LOW (good engagement despite issues):
+    "LOW risk (3/10). Primary driver: Strong relationship overrides minor issues. Two
+    API timeout tickets but customer is collaborative, provides detailed context, mentions
+    business value regularly. $25k account, 8 months out. Issues being resolved. Action:
+    Standard monthly check-in, keep momentum."
+
+    SITUATION OVERVIEW (customer-facing): "Your account shows strong engagement and
+    collaboration. While there have been some API timeout issues, the proactive communication
+    and detailed context you've provided has enabled quick resolution. The partnership
+    demonstrates healthy momentum and value realization."
+
+    CRITICAL: The situation_overview field is shown directly to customers. NEVER include:
+    - Our company's revenue numbers (MRR, ARR)
+    - Financial amounts "at risk" for our company
+    - Internal prioritization metrics
+    - Phrases like "$50k at risk" or "renewal in X months = $Y exposure"
+
+    DO focus on:
+    - THEIR business impact and operational challenges
+    - Technical issues affecting THEIR capabilities
+    - The relationship and engagement health
+    - What needs to happen to improve THEIR outcomes
+
+    DO NOT write: generic risk scores without clear primary drivers or strategic reasoning.
   agent: churn_risk_classifier
   context:
   - analyze_support_tickets

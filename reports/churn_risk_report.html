@@ -1,53 +1,107 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Churn Risk Classification and Outreach Emails</title>
-<style>
-body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; }
-h1 { color: #1A5276; }
-h2 { color: #21618C; border-bottom: 1px solid #aaa; padding-bottom: 2px; }
-.account-block { border: 1px solid #dee2e6; border-radius: 5px; background: #f6f9fa; margin: 2em 0; padding: 1.2em 2em; }
-.email { background: #fff; border: 1px solid #bbb; border-radius: 4px; margin: 1em 0 0 0; padding: 1em; }
-.overview { font-style: italic; color: #444; }
-.not-sent { color: #b22222; font-weight: bold; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Risk Report - Review Before Sending</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<h1>Churn Risk Classification and Outreach Emails</h1>
-<div class="account-block">
-<h2>Account: Salesforce</h2>
-<strong>Account ID:</strong> A001<br>
-<strong>Industry:</strong> SaaS<br>
-<strong>Owner:</strong> Bret Taylor<br>
-<strong>MRR:</strong> $12,500<br>
-<div class='overview'>
-<strong>Churn Score:</strong> 6 &mdash; 
-<strong>Classification:</strong> Medium<br>
-<strong>Overview:</strong> The account is currently classified with a medium risk of churn due to recurring performance and API stability issues. While the customer shows moderate engagement and a positive relationship post-issue resolution, the initial frustration from repeated issues poses a potential risk. The stable financial contribution and contract terms provide some buffer, but the competitive SaaS industry necessitates high service standards. Addressing the technical issues and improving communication are crucial to mitigate churn risk.
-</div>
-<div class='email'>
-<strong>Email Subject:</strong> Proactive Solutions for Enhanced Stability and Satisfaction<br><br>
-Dear Bret,
+<body class="bg-gray-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Churn Risk Report</h1>
+            <p class="text-sm text-gray-600 mt-1">
+                1 account •
+                1 email to review
+            </p>
+        </div>
 
-I hope this message finds you well. I wanted to reach out personally to address some of the ongoing challenges you've faced with performance and API stability. At [Your Company Name], we deeply value our partnership with Salesforce and are committed to ensuring your experience with our platform aligns with your high standards.
+        <!-- Account List -->
+        
+        <div class="bg-white border border-gray-200 mb-6">
+            <!-- Top Bar: Account Name + Risk Badge -->
+            <div class="bg-gray-50 px-6 py-3 flex items-center justify-between border-b">
+                <div>
+                    <h2 class="font-semibold text-gray-900">Salesforce</h2>
+                    <div class="text-xs text-gray-500 mt-0.5">
+                        A001
+                         • Bret Taylor
+                         • SaaS
+                         • $12,500/mo
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <div class="text-xs text-gray-500">Risk Score</div>
+                        <div class="text-lg font-bold text-gray-900">6/10</div>
+                    </div>
+                    <span class="text-xs font-semibold px-2.5 py-1 border
+                        border-yellow-600 text-yellow-600
+                        ">
+                        MEDIUM
+                    </span>
+                </div>
+                
+            </div>
 
-Understanding your goals to reduce support tickets by 50% over the next six months and maintain customer satisfaction scores, we have initiated a comprehensive plan tailored specifically for Salesforce. Here's a snapshot of our strategic actions:
+            
+            <div class="grid md:grid-cols-2 divide-x">
+                <!-- Left Column: Analysis -->
+                <div class="p-6">
+                    
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Analysis</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">Salesforce, with a contract value of $150k/year, is experiencing medium risk of churn primarily due to technical reliability issues affecting dashboard performance and API stability. Despite these challenges, the account maintains a collaborative relationship and recognizes the ongoing value of the product. With $56,250 at risk and renewal in 4.5 months, a focused technical improvement plan with weekly check-ins is recommended to ensure stability and performance improvements.</p>
+                    
 
-1. **Technical Improvement Plan**: Our dedicated technical team is prioritizing the resolution of recurring performance issues. We've also implemented a proactive monitoring system to detect and address potential problems before they impact your operations.
+                    <h3 class="mt-4 text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Commitments</h3>
+                    
+                    <ul class="list-disc list-inside pl-3 text-sm text-gray-700 leading-relaxed">
+                        
+                        <li>Deploy dashboard performance enhancement patch by Wednesday</li>
+                        
+                        <li>Deploy API stability update by Friday</li>
+                        
+                    </ul>
+                    
+                </div>
 
-2. **Enhanced Communication**: You've been assigned a dedicated account manager who will facilitate weekly check-ins and provide monthly reports on our progress. This ensures you are always informed and can offer feedback in real-time.
+                <!-- Right Column: Email -->
+                <div class="p-6">
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Outreach Email</h3>
+                    </div>
 
-3. **Customer Engagement**: We're excited to offer exclusive webinars that will showcase new features and best practices tailored to Salesforce's needs. These sessions are designed to maximize your platform's value and improve overall satisfaction.
+                    <!-- Email Headers -->
+                    <div class="space-y-2 mb-4 pb-4 border-b border-gray-200">
+                        <div class="flex text-sm">
+                            <span class="text-gray-500 w-16 flex-shrink-0">To:</span>
+                            <span class="text-gray-900">Bret Taylor &lt;bret.taylor@salesforce.test&gt;</span>
+                        </div>
+                        <div class="flex text-sm">
+                            <span class="text-gray-500 w-16 flex-shrink-0">From:</span>
+                            <span class="text-gray-900">Your Customer Success Team</span>
+                        </div>
+                        <div class="flex text-sm">
+                            <span class="text-gray-500 w-16 flex-shrink-0">Subject:</span>
+                            <input type="text"
+                                   value="Enhancing Dashboard Performance and API Stability by Friday"
+                                   class="flex-1 text-gray-900 border-0 p-0 focus:outline-none focus:ring-0 bg-transparent">
+                        </div>
+                    </div>
 
-To further support these initiatives, I invite you to a brief call next week to discuss any immediate concerns and review the progress we’ve made. Please let me know your availability, and we'll coordinate a convenient time.
-
-Thank you for your continued trust in us. We are dedicated to evolving our services to meet your expectations and strengthen our mutual growth.
-
-Warm regards,
-
-[Your Name]  
-[Your Position]  
-[Your Company Name]  
-[Your Contact Information]
-</div>
-</div>
-</body></html>
+                    <!-- Email Body -->
+                    <div>
+                        <textarea class="w-full text-sm text-gray-700 border-0 p-0 min-h-64 focus:outline-none focus:ring-0 bg-transparent leading-relaxed"
+                                  style="resize: vertical; white-space: pre-wrap;">Hi Bret, I understand that technical issues with dashboard performance and API stability are impacting your operational efficiency. Our team is deploying a dashboard performance enhancement patch by Wednesday and an API stability update by Friday. I'll update you with progress notes—let me know if you want a brief call to discuss these. Best, [Your Name]</textarea>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -4,11 +4,16 @@ develop_retention_strategy:
     Look at this customer's data and answer these questions:
 
     1. What is the ONE biggest problem causing this customer pain right now?
-    2. What concrete action can we take THIS WEEK to fix it?
-    3. What should we say to them that shows we actually understand their situation?
+    2. What SPECIFIC, CONCRETE action are we committing to THIS WEEK to fix it?
+    3. What business impact are we preventing for them?
 
-    Don't create a comprehensive strategy document. Just identify the core issue
-    and the fix. Be specific. Be brief.
+    CRITICAL RULES:
+    - The action must be SPECIFIC (not "audit" or "investigate")
+    - We must be COMMITTING to do something, not proposing to discuss it
+    - Show you understand the business impact, not just the technical issue
+    - If it's a bug/issue: commit to a fix timeline
+    - If it's a feature gap: commit to a workaround or roadmap clarity
+    - If it's poor support: commit to escalation or direct engineer access
 
     Account information:
     {account_information}
@@ -18,65 +23,98 @@ develop_retention_strategy:
 
   expected_output: |-
     A brief, focused strategy (3-5 sentences max) that includes:
-      - The ONE core problem (be specific, not generic)
-      - The concrete action we'll take to fix it (must be actionable this week)
-      - What this customer actually cares about (not generic "success metrics")
+      - The ONE core problem with BUSINESS IMPACT (not just technical symptoms)
+      - The SPECIFIC commitment we're making (with timeline/deliverable)
+      - Why this matters to THEIR business specifically
 
-    Example good output:
-    "Their tracking page has been broken for weeks (Ticket T5103) and they keep
-    getting generic responses. They're a logistics company—tracking IS their business.
-    We need to get an engineer on a call with them THIS WEEK to fix it permanently,
-    not just ticket it. They care about reliability, not apologies."
+    Example GOOD output:
+    "Their tracking page breaks during peak shipping hours (Ticket T5103) and they're
+    a logistics company where every tracking failure loses them customers. We're
+    committing our backend team to ship a fix by Friday that adds failover routing
+    during high load. They care about 99.9% uptime during business hours, not explanations."
 
-    DO NOT write: risk assessments, comprehensive plans, backup strategies, or
-    multi-phase implementation timelines. Just the core problem and the fix.
+    Example BAD output:
+    "Dashboard is slow. We should run a performance audit and schedule a meeting
+    to discuss findings."
+
+    DO NOT write: vague actions like "audit," "investigate," "discuss," or "review."
+    DO write: specific deliverables like "ship a fix by Friday," "add engineer to
+    their Slack channel today," "implement caching layer this week."
   agent: customer_retention_strategist
 draft_personalized_outreach_email:
   description: |-
-    Write a short, human email to this customer based on the retention strategy.
+    Write a short, strategic email that shows you're ALREADY taking action, not just
+    proposing to discuss the problem.
 
-    Rules:
+    CRITICAL RULES:
     - Keep it under 100 words (aim for 50-75)
-    - Write like a real person, not a corporate robot
-    - Focus ONLY on the one core problem identified in the strategy
-    - No generic phrases like "I hope this finds you well" or "strategic partnership"
-    - No bullet points or formatted lists—just natural sentences
-    - One clear next step (a call, a meeting, a specific action)
-    - Be honest and direct
+    - Lead with the SPECIFIC ACTION you're committing to (not "let's meet to discuss")
+    - Show you understand the BUSINESS IMPACT (not just the technical issue)
+    - Be direct and confident—you're solving this, not investigating it
+    - No vague words: "audit," "review," "discuss," "touch base," "circle back"
+    - A meeting/call can be SECONDARY to confirm details, but the primary message
+      must be the concrete action you're taking
+
+    STRUCTURE:
+    1. Acknowledge the specific problem with context
+    2. State the CONCRETE action you're committing to (with timeline)
+    3. Optional: propose a brief call to confirm details or share updates
+    4. Keep tone confident but warm
 
     Account information:
     {account_information}
 
   expected_output: |-
-    A short, natural email (50-75 words) with a list of actionable commitments:
+    A short, strategic email (50-75 words) with a list of actionable commitments:
 
     EMAIL FORMAT:
-    - Subject line: specific and relevant (e.g., "Fix for the tracking page issue")
+    - Subject line: action-oriented (e.g., "Fixing your tracking page by Friday")
     - Greeting: use their first name
-    - Body: 2-3 short sentences acknowledging the specific problem and proposing the fix
-    - Call to action: one clear next step (e.g., "Can we get on a call Thursday?")
-    - Sign off: simple and warm (e.g., "Thanks, [Name]")
+    - Body: 2-3 sentences that:
+      * Acknowledge specific problem + business impact
+      * State the concrete commitment with timeline
+      * (Optional) Suggest brief touchpoint to share progress
+    - Sign off: simple and confident
 
     COMMITMENTS LIST:
     - Extract ONLY the specific, actionable promises made in the email
-    - Must be things the sender can actually track and fulfill
-    - Include deadlines/timeframes mentioned (e.g., "this week", "Thursday")
-    - Keep each commitment as a single, clear action item
+    - Must include deliverables with deadlines
+    - Must be measurable and trackable
 
-    Example email:
-    "Hi Raj, I saw the tracking page has been causing issues for your team. I'd
-    like to get one of our engineers on a call with you this week to fix it
-    properly—not just patch it. Does Thursday at 2pm work? Thanks, Sarah"
+    Example GOOD email (bug fix):
+    Subject: Fixing your tracking page by Friday
 
-    Example commitments for above email:
-    - "Schedule engineer call with customer by Thursday at 2pm"
-    - "Provide permanent fix for tracking page issue (not just a patch)"
+    "Hi Raj, I know your tracking page has been failing during peak hours and that's
+    directly impacting your customers. Our backend team is shipping a fix by Friday
+    that adds failover routing during high load. I'll send you the deployment notes
+    Friday afternoon—let me know if you want to jump on a quick call to review them.
+    Thanks, Sarah"
 
-    AVOID IN EMAIL: long paragraphs, corporate language, listing multiple issues,
-    vague promises, generic statements about "commitment to excellence"
+    Example commitments:
+    - "Ship tracking page fix with failover routing by Friday"
+    - "Send deployment notes Friday afternoon"
 
-    AVOID IN COMMITMENTS: vague items like "provide excellent service" or
-    "ensure customer satisfaction"—only concrete, measurable actions
+    Example GOOD email (support escalation):
+    Subject: Getting you direct access to our engineering team
+
+    "Hi Marcus, I saw you've been bounced between support reps on the API timeout
+    issue (T5201, T5289). That ends today—I'm adding you directly to our backend
+    team's Slack channel so you can work with the engineers fixing this. You should
+    have the invite within the hour. Thanks, Alex"
+
+    Example commitments:
+    - "Add customer to backend team Slack channel within one hour"
+    - "Ensure direct engineer access for API timeout issue"
+
+    Example BAD email (too vague):
+    "Hi Bret, I noticed the slow dashboard has been a concern. We're going to run
+    a performance audit this week. Could we touch base on Friday to discuss findings?"
+
+    Why BAD: "performance audit" is vague, "discuss findings" delays action, no
+    business impact acknowledged, no concrete deliverable
+
+    AVOID: "audit," "investigate," "review," "touch base," "circle back," "let's discuss"
+    USE: "shipping," "fixing," "adding," "implementing," "deploying," with deadlines
   agent: email_outreach_specialist
   context:
   - develop_retention_strategy

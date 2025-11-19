@@ -7,8 +7,26 @@
     "industry": "SaaS",
     "mrr": 12500,
     "renewal_date": "2025-04-10",
-    "owner_name": "Bret Taylor",
-    "owner_email": "bret.taylor@salesforce.test"
+    "contacts": [
+      {
+        "name": "Bret Taylor",
+        "email": "bret.taylor@salesforce.test",
+        "role": "CEO",
+        "is_champion": false
+      },
+      {
+        "name": "Sarah Chen",
+        "email": "sarah.chen@salesforce.test",
+        "role": "VP of Engineering",
+        "is_champion": true
+      },
+      {
+        "name": "Michael Rodriguez",
+        "email": "michael.rodriguez@salesforce.test",
+        "role": "Director of Product",
+        "is_champion": false
+      }
+    ]
   },
   {
     "account_id": "A002",
@@ -18,8 +36,26 @@
     "industry": "Logistics",
     "mrr": 3800,
     "renewal_date": "2025-06-02",
-    "owner_name": "Raj Subramaniam",
-    "owner_email": "raj.subramaniam@fedex.test"
+    "contacts": [
+      {
+        "name": "Raj Subramaniam",
+        "email": "raj.subramaniam@fedex.test",
+        "role": "CEO",
+        "is_champion": false
+      },
+      {
+        "name": "Lisa Wong",
+        "email": "lisa.wong@fedex.test",
+        "role": "VP of Operations",
+        "is_champion": true
+      },
+      {
+        "name": "James Patterson",
+        "email": "james.patterson@fedex.test",
+        "role": "IT Director",
+        "is_champion": false
+      }
+    ]
   },
   {
     "account_id": "A003",
@@ -29,8 +65,26 @@
     "industry": "Retail",
     "mrr": 7200,
     "renewal_date": "2025-03-20",
-    "owner_name": "Brian Cornell",
-    "owner_email": "brian.cornell@target.test"
+    "contacts": [
+      {
+        "name": "Brian Cornell",
+        "email": "brian.cornell@target.test",
+        "role": "CEO",
+        "is_champion": false
+      },
+      {
+        "name": "Amanda Smith",
+        "email": "amanda.smith@target.test",
+        "role": "Chief Technology Officer",
+        "is_champion": false
+      },
+      {
+        "name": "David Kim",
+        "email": "david.kim@target.test",
+        "role": "Senior Engineering Manager",
+        "is_champion": true
+      }
+    ]
   },
   {
     "account_id": "A004",
@@ -40,8 +94,20 @@
     "industry": "Legal",
     "mrr": 2100,
     "renewal_date": "2025-08-19",
-    "owner_name": "Richard Trobman",
-    "owner_email": "richard.trobman@lw.test"
+    "contacts": [
+      {
+        "name": "Richard Trobman",
+        "email": "richard.trobman@lw.test",
+        "role": "Managing Partner",
+        "is_champion": false
+      },
+      {
+        "name": "Jennifer Hayes",
+        "email": "jennifer.hayes@lw.test",
+        "role": "Chief Information Officer",
+        "is_champion": true
+      }
+    ]
   },
   {
     "account_id": "A005",
@@ -51,7 +117,25 @@
     "industry": "Manufacturing",
     "mrr": 5400,
     "renewal_date": "2025-02-15",
-    "owner_name": "David Calhoun",
-    "owner_email": "david.calhoun@boeing.test"
+    "contacts": [
+      {
+        "name": "David Calhoun",
+        "email": "david.calhoun@boeing.test",
+        "role": "CEO",
+        "is_champion": false
+      },
+      {
+        "name": "Robert Johnson",
+        "email": "robert.johnson@boeing.test",
+        "role": "VP of Digital Operations",
+        "is_champion": false
+      },
+      {
+        "name": "Maria Garcia",
+        "email": "maria.garcia@boeing.test",
+        "role": "Director of IT Infrastructure",
+        "is_champion": true
+      }
+    ]
   }
 ]

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import os
 import toon_format as toon
 
 from crewai.flow import Flow, listen, start
@@ -46,13 +45,6 @@ class ChurnMonitorFlow(Flow[ChurnMonitorState]):
             }
             result = ChurnRiskClassifierCrew().crew().kickoff(inputs=inputs)
             account.churn_report = result.pydantic
-
-    def get_human_feedback(self):
-        """
-        Gets human feedback on the churn risk classification with additional
-        context about the accounts.
-        """
-        pass
 
     @listen(classify_churn_risk)
     def outreach_accounts(self):

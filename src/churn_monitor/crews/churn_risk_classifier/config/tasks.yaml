@@ -68,7 +68,8 @@ analyze_account_profile:
     **Evaluate Strategic Fit Signals**:
     - What does their org_bio reveal about their core business?
     - Are we solving their main problem or a side project?
-    - Who is the owner_name? C-level = political capital, manager = less leverage
+    - Who are the contacts? C-level contacts = political capital, managers = less leverage
+    - Is there a champion (is_champion: true)? Champions can help navigate internally
     - Domain/company prestige = logo value, reference customer, expansion potential
 
     **Calculate Priority Score**: Not all $50k accounts are equal. A $50k logistics company
@@ -83,24 +84,27 @@ analyze_account_profile:
     1. **Financial exposure**: MRR + renewal timing = dollars at risk
     2. **Industry criticality**: Does this problem impact their core business?
     3. **Strategic importance**: Logo value, expansion potential, reference customer?
-    4. **Contact leverage**: Who owns this account internally (signals power)?
+    4. **Contact leverage**: Who are the contacts? Champions can help navigate internally
 
     Example STRATEGIC output:
     "Salesforce is a $150k/year logo account (renewal in 4 months = $50k at risk).
-    Owner is Bret Taylor (Chairman) = C-level relationship with political capital.
-    They're SaaS, so dashboard performance issues affect THEIR customer demos—cascading
-    business impact. High logo value for our credibility. Priority: CRITICAL."
+    Contacts include Bret Taylor (CEO) = C-level relationship with political capital, plus
+    Sarah Chen (VP of Engineering, champion) who can help navigate internally. They're SaaS,
+    so dashboard performance issues affect THEIR customer demos—cascading business impact.
+    High logo value for our credibility. Priority: CRITICAL."
 
     Example MEDIUM priority:
-    "Target is $86k/year retail account, renewal in 6 months. Owner is Brian Cornell (CEO)
-    = strong relationship leverage. Retail means Q4 (holiday) is make-or-break, but we're
-    in Q1 so timing is okay. Data accuracy issues affect their inventory decisions but
-    not existential yet. Priority: MEDIUM-HIGH."
+    "Target is $86k/year retail account, renewal in 6 months. Contacts include Brian Cornell
+    (CEO) and David Kim (Senior Engineering Manager, champion) = strong relationship leverage
+    at multiple levels. Retail means Q4 (holiday) is make-or-break, but we're in Q1 so timing
+    is okay. Data accuracy issues affect their inventory decisions but not existential yet.
+    Priority: MEDIUM-HIGH."
 
     Example LOW priority (don't manufacture urgency):
     "Latham & Watkins is $25k/year, renewal in 8 months. Mid-tier legal firm, not a
-    marquee logo. Owner is Richard Trobman (Partner, not C-level) = limited political
-    capital. Document search is important but not mission-critical. Priority: LOW."
+    marquee logo. Contacts include Richard Trobman (Managing Partner) and Jennifer Hayes
+    (CIO, champion). Having a champion is positive, but lower financial stakes and longer
+    runway. Document search is important but not mission-critical. Priority: LOW."
 
     DO NOT write: generic profiles without financial math or strategic reasoning.
   agent: account_profile_analyzer

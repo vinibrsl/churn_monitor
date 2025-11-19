@@ -43,10 +43,21 @@ develop_retention_strategy:
   agent: customer_retention_strategist
 draft_personalized_outreach_email:
   description: |-
-    Write a short, strategic email that shows you're ALREADY taking action, not just
-    proposing to discuss the problem.
+    First, SELECT THE RIGHT CONTACT from the account's contact list, then write a short,
+    strategic email that shows you're ALREADY taking action.
 
-    CRITICAL RULES:
+    CONTACT SELECTION RULES:
+    - Review all contacts in the account's contact list
+    - Consider who is best positioned to address this specific issue:
+      * For technical issues: reach out to technical leaders (CTO, VP of Engineering, IT Director)
+      * For business/strategic issues: reach out to executives (CEO, COO, Managing Partner)
+      * For operational issues: reach out to operations leaders (VP of Operations, Director of Operations)
+    - Champions (is_champion: true) are internal advocates who trust you—they're often
+      the BEST choice because they can help you navigate internally
+    - If a champion exists and is relevant to the issue, strongly prefer them
+    - You MUST select exactly ONE contact to receive the email
+
+    EMAIL WRITING RULES:
     - Keep it under 100 words (aim for 50-75)
     - Lead with the SPECIFIC ACTION you're committing to (not "let's meet to discuss")
     - Show you understand the BUSINESS IMPACT (not just the technical issue)
@@ -54,18 +65,25 @@ draft_personalized_outreach_email:
     - No vague words: "audit," "review," "discuss," "touch base," "circle back"
     - A meeting/call can be SECONDARY to confirm details, but the primary message
       must be the concrete action you're taking
+    - Tailor the tone and focus to the selected contact's role
 
     STRUCTURE:
-    1. Acknowledge the specific problem with context
-    2. State the CONCRETE action you're committing to (with timeline)
-    3. Optional: propose a brief call to confirm details or share updates
-    4. Keep tone confident but warm
+    1. SELECT the appropriate contact from the contact list
+    2. Acknowledge the specific problem with context
+    3. State the CONCRETE action you're committing to (with timeline)
+    4. Optional: propose a brief call to confirm details or share updates
+    5. Keep tone confident but warm, tailored to recipient's role
 
     Account information:
     {account_information}
 
   expected_output: |-
-    A short, strategic email (50-75 words) with a list of actionable commitments:
+    A short, strategic email (50-75 words) with selected contact details and actionable commitments:
+
+    SELECTED CONTACT:
+    - contact_name: The full name of the selected contact
+    - contact_email: The email address of the selected contact
+    - contact_role: The role/title of the selected contact
 
     EMAIL FORMAT:
     - Subject line: action-oriented (e.g., "Fixing your tracking page by Friday")
@@ -81,10 +99,13 @@ draft_personalized_outreach_email:
     - Must include deliverables with deadlines
     - Must be measurable and trackable
 
-    Example GOOD email (bug fix):
+    Example GOOD email (bug fix to operations champion):
+    Selected Contact: Lisa Wong (VP of Operations, is_champion: true)
+    Reasoning: Operations issue affecting customer experience, and Lisa is a champion
+
     Subject: Fixing your tracking page by Friday
 
-    "Hi Raj, I know your tracking page has been failing during peak hours and that's
+    "Hi Lisa, I know your tracking page has been failing during peak hours and that's
     directly impacting your customers. Our backend team is shipping a fix by Friday
     that adds failover routing during high load. I'll send you the deployment notes
     Friday afternoon—let me know if you want to jump on a quick call to review them.
@@ -94,10 +115,11 @@ draft_personalized_outreach_email:
     - "Ship tracking page fix with failover routing by Friday"
     - "Send deployment notes Friday afternoon"
 
-    Example GOOD email (support escalation):
-    Subject: Getting you direct access to our engineering team
+    Example GOOD email (support escalation to technical champion):
+    Selected Contact: Jennifer Hayes (CIO, is_champion: true)
+    Reasoning: Technical support issue, and Jennifer is a champion who can help escalate internally
 
-    "Hi Marcus, I saw you've been bounced between support reps on the API timeout
+    "Hi Jennifer, I saw you've been bounced between support reps on the API timeout
     issue (T5201, T5289). That ends today—I'm adding you directly to our backend
     team's Slack channel so you can work with the engineers fixing this. You should
     have the invite within the hour. Thanks, Alex"
@@ -106,12 +128,15 @@ draft_personalized_outreach_email:
     - "Add customer to backend team Slack channel within one hour"
     - "Ensure direct engineer access for API timeout issue"
 
-    Example BAD email (too vague):
-    "Hi Bret, I noticed the slow dashboard has been a concern. We're going to run
+    Example BAD email (vague + wrong contact):
+    Selected Contact: David Calhoun (CEO)
+    Reasoning: Technical issue shouldn't go to CEO when there are better contacts
+
+    "Hi David, I noticed the slow dashboard has been a concern. We're going to run
     a performance audit this week. Could we touch base on Friday to discuss findings?"
 
-    Why BAD: "performance audit" is vague, "discuss findings" delays action, no
-    business impact acknowledged, no concrete deliverable
+    Why BAD: Wrong contact selection (CEO for technical issue), "performance audit" is vague,
+    "discuss findings" delays action, no business impact acknowledged, no concrete deliverable
 
     AVOID: "audit," "investigate," "review," "touch base," "circle back," "let's discuss"
     USE: "shipping," "fixing," "adding," "implementing," "deploying," with deadlines

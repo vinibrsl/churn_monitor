@@ -2,8 +2,29 @@ from typing import Literal, Optional, Any, Dict
 from pydantic import BaseModel, Field
 from datetime import datetime
 
+class Contact(BaseModel):
+    name: str
+    email: str
+    role: str
+    is_champion: bool = Field(
+        default=False,
+        description="Whether this contact is a champion who advocates for the product internally.",
+    )
+
 class OutreachEmail(BaseModel):
     account_id: str
+    contact_name: str = Field(
+        ...,
+        description="The name of the contact selected to receive this outreach email.",
+    )
+    contact_email: str = Field(
+        ...,
+        description="The email address of the contact selected to receive this outreach email.",
+    )
+    contact_role: str = Field(
+        ...,
+        description="The role of the contact selected to receive this outreach email.",
+    )
     email_subject: str
     email_content: str
     commitments: list[str] = Field(
@@ -43,8 +64,10 @@ class Account(BaseModel):
     industry: str
     mrr: int
     renewal_date: str
-    owner_name: str
-    owner_email: str
+    contacts: list[Contact] = Field(
+        ...,
+        description="List of contacts at this account. May include champions, decision makers, and other stakeholders.",
+    )
     churn_report: Optional[ChurnReport] = None
 
 class SupportTicket(BaseModel):

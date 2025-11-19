@@ -5,28 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Churn Risk Report - Review Before Sending</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function openMailto(accountId) {
+            const email = document.getElementById('email-' + accountId).value;
+            const subject = document.getElementById('subject-' + accountId).value;
+            const body = document.getElementById('body-' + accountId).value;
+
+            const mailtoLink = 'mailto:' + encodeURIComponent(email) +
+                               '?subject=' + encodeURIComponent(subject) +
+                               '&body=' + encodeURIComponent(body);
+
+            window.location.href = mailtoLink;
+        }
+
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        window.addEventListener('load', function() {
+            document.querySelectorAll('textarea').forEach(function(textarea) {
+                autoResize(textarea);
+            });
+        });
+    </script>
 </head>
 <body class="bg-gray-50 p-8">
     <div class="max-w-6xl mx-auto">
-        <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-2xl font-bold text-gray-900">Churn Risk Report</h1>
-            <p class="text-sm text-gray-600 mt-1">
-                1 account •
-                1 email to review
-            </p>
+            <div class="flex items-center gap-2">
+                <img src="../src/churn_monitor/static/crewai_signal_2025_logo.png" alt="CrewAI Signal 2025 Logo" class="h-16">
+                <h1 class="text-2xl text-gray-900">Workshop</h1>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-900">Churn Monitor Results</h1>
         </div>
-
-        <!-- Account List -->
         
         <div class="bg-white border border-gray-200 mb-6">
-            <!-- Top Bar: Account Name + Risk Badge -->
             <div class="bg-gray-50 px-6 py-3 flex items-center justify-between border-b">
                 <div>
                     <h2 class="font-semibold text-gray-900">Salesforce</h2>
                     <div class="text-xs text-gray-500 mt-0.5">
                         A001
-                         • Bret Taylor
+                         • 3 contacts
                          • SaaS
                          • $12,500/mo
                     </div>
@@ -35,12 +55,12 @@
                 <div class="flex items-center gap-3">
                     <div class="text-right">
                         <div class="text-xs text-gray-500">Risk Score</div>
-                        <div class="text-lg font-bold text-gray-900">6/10</div>
+                        <div class="text-lg font-bold text-gray-900">9/10</div>
                     </div>
                     <span class="text-xs font-semibold px-2.5 py-1 border
-                        border-yellow-600 text-yellow-600
+                        border-red-600 text-red-600
                         ">
-                        MEDIUM
+                        HIGH
                     </span>
                 </div>
                 
@@ -52,16 +72,18 @@
                 <div class="p-6">
                     
                     <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Analysis</h3>
-                    <p class="text-sm text-gray-700 leading-relaxed">Salesforce, with a contract value of $150k/year, is experiencing medium risk of churn primarily due to technical reliability issues affecting dashboard performance and API stability. Despite these challenges, the account maintains a collaborative relationship and recognizes the ongoing value of the product. With $56,250 at risk and renewal in 4.5 months, a focused technical improvement plan with weekly check-ins is recommended to ensure stability and performance improvements.</p>
+                    <p class="text-sm text-gray-700 leading-relaxed">Your account shows a concerning shift in engagement patterns that requires immediate attention. After demonstrating strong collaboration and clear articulation of business needs in early 2025—where you explicitly connected our platform to your critical reporting workflows—there has been a 10-month period of silence. For an organization that depends on reliable API performance and dashboard functionality for core analytics operations, this extended quiet period is unusual and raises questions about current product satisfaction and usage levels. Additionally, with your renewal timeline appearing to have passed in April 2025, there is urgent need to reconnect and ensure we're meeting your business objectives. The combination of engagement shift and renewal timing uncertainty requires immediate executive-level discussion to assess your current experience, address any unspoken challenges, and realign on strategic value delivery. Your VP of Engineering champion and executive stakeholders need direct outreach this week to re-establish communication and ensure your reporting and analytics capabilities are fully supported.</p>
                     
 
                     <h3 class="mt-4 text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Commitments</h3>
                     
                     <ul class="list-disc list-inside pl-3 text-sm text-gray-700 leading-relaxed">
                         
-                        <li>Deploy dashboard performance enhancement patch by Wednesday</li>
+                        <li>Add Solutions Architect to Salesforce team Slack channel by Thursday</li>
                         
-                        <li>Deploy API stability update by Friday</li>
+                        <li>Complete live health check of API performance and dashboard stability by Friday</li>
+                        
+                        <li>Deliver written action plan for any issues found by Friday</li>
                         
                     </ul>
                     
@@ -70,7 +92,7 @@
                 <!-- Right Column: Email -->
                 <div class="p-6">
                     
-                    <div class="flex items-center justify-between mb-4">
+                    <div class="mb-4">
                         <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Outreach Email</h3>
                     </div>
 
@@ -78,7 +100,8 @@
                     <div class="space-y-2 mb-4 pb-4 border-b border-gray-200">
                         <div class="flex text-sm">
                             <span class="text-gray-500 w-16 flex-shrink-0">To:</span>
-                            <span class="text-gray-900">Bret Taylor &lt;bret.taylor@salesforce.test&gt;</span>
+                            <span class="text-gray-900">Sarah Chen &lt;sarah.chen@salesforce.test&gt;
+                             <span class="text-gray-500">(VP of Engineering)</span></span>
                         </div>
                         <div class="flex text-sm">
                             <span class="text-gray-500 w-16 flex-shrink-0">From:</span>
@@ -87,16 +110,30 @@
                         <div class="flex text-sm">
                             <span class="text-gray-500 w-16 flex-shrink-0">Subject:</span>
                             <input type="text"
-                                   value="Enhancing Dashboard Performance and API Stability by Friday"
+                                   id="subject-A001"
+                                   value="Adding you to our engineering team by Thursday"
                                    class="flex-1 text-gray-900 border-0 p-0 focus:outline-none focus:ring-0 bg-transparent">
                         </div>
                     </div>
 
                     <!-- Email Body -->
-                    <div>
-                        <textarea class="w-full text-sm text-gray-700 border-0 p-0 min-h-64 focus:outline-none focus:ring-0 bg-transparent leading-relaxed"
-                                  style="resize: vertical; white-space: pre-wrap;">Hi Bret, I understand that technical issues with dashboard performance and API stability are impacting your operational efficiency. Our team is deploying a dashboard performance enhancement patch by Wednesday and an API stability update by Friday. I'll update you with progress notes—let me know if you want a brief call to discuss these. Best, [Your Name]</textarea>
+                    <div class="mb-4">
+                        <textarea id="body-A001"
+                                  class="w-full text-sm text-gray-700 border-0 p-0 focus:outline-none focus:ring-0 bg-transparent leading-relaxed"
+                                  style="resize: none; white-space: pre-wrap; overflow: hidden;"
+                                  oninput="autoResize(this)">Hi Sarah,
+
+I know your reporting workflows hit blocking issues earlier this year, and 10 months of silence tells me we haven't earned back your trust. Our Solutions Architect is joining your team's Slack channel by Thursday and running a live health check of your API performance and dashboards by Friday—you'll have a written action plan for anything we find. Can we jump on a 15-minute call Thursday afternoon so I can walk you through what we're fixing?
+
+Thanks,
+[Your name]</textarea>
                     </div>
+
+                    <button onclick="openMailto('A001')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition-colors">
+                        Send
+                    </button>
+
+                    <input type="hidden" id="email-A001" value="sarah.chen@salesforce.test">
                     
                 </div>
             </div>

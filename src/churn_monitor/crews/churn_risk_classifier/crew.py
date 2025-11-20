@@ -14,6 +14,11 @@ from jambo import SchemaConverter
 
 from churn_monitor.models import ChurnReport
 
+if os.getenv("ANTHROPIC_API_KEY"):
+    llm = LLM(model="anthropic/claude-sonnet-4-5", temperature=0.7)
+else:
+    llm = LLM(model="openai/gpt-4o", temperature=0.7)
+
 @CrewBase
 class ChurnRiskClassifierCrew:
     """ChurnRiskClassifier crew"""
@@ -35,22 +40,23 @@ class ChurnRiskClassifierCrew:
             max_rpm=None,
 
             max_execution_time=None,
-            llm=LLM(
-                model="anthropic/claude-sonnet-4-5",
-                temperature=0.7,
-            ),
+            llm=llm,
 
         )
 
     @agent
     def account_profile_analyzer(self) -> Agent:
 
+        if os.getenv("SERPER_API_KEY"):
+            tools = [ScrapeWebsiteTool(), SerperDevTool()]
+        else:
+            tools = [ScrapeWebsiteTool()]
+
         return Agent(
             config=self.agents_config["account_profile_analyzer"],
 
 
-            tools=[				ScrapeWebsiteTool(),
-				SerperDevTool()],
+            tools=tools,
             reasoning=False,
             max_reasoning_attempts=None,
             inject_date=True,
@@ -59,10 +65,7 @@ class ChurnRiskClassifierCrew:
             max_rpm=None,
 
             max_execution_time=None,
-            llm=LLM(
-                model="anthropic/claude-sonnet-4-5",
-                temperature=0.7,
-            ),
+            llm=llm,
 
         )
 
@@ -82,10 +85,7 @@ class ChurnRiskClassifierCrew:
             max_rpm=None,
 
             max_execution_time=None,
-            llm=LLM(
-                model="anthropic/claude-sonnet-4-5",
-                temperature=0.7,
-            ),
+            llm=llm,
 
         )
 

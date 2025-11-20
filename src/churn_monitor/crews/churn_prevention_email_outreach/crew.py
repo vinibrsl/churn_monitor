@@ -7,7 +7,10 @@ from crewai.project import CrewBase, agent, crew, task
 
 from churn_monitor.models import OutreachEmail
 
-
+if os.getenv("ANTHROPIC_API_KEY"):
+    llm = LLM(model="anthropic/claude-sonnet-4-5", temperature=0.7)
+else:
+    llm = LLM(model="openai/gpt-4o", temperature=0.7)
 
 @CrewBase
 class ChurnPreventionEmailOutreachCrew:
@@ -30,10 +33,7 @@ class ChurnPreventionEmailOutreachCrew:
             max_rpm=None,
 
             max_execution_time=None,
-            llm=LLM(
-                model="anthropic/claude-sonnet-4-5",
-                temperature=0.7,
-            ),
+            llm=llm,
 
         )
 
@@ -53,10 +53,7 @@ class ChurnPreventionEmailOutreachCrew:
             max_rpm=None,
 
             max_execution_time=None,
-            llm=LLM(
-                model="anthropic/claude-sonnet-4-5",
-                temperature=0.7,
-            ),
+            llm=llm,
 
         )
 

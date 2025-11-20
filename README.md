@@ -24,22 +24,21 @@ This project demonstrates an agentic system that:
 - Python >=3.10 <3.14
 - [UV](https://docs.astral.sh/uv/) package manager
 - [CrewAI](https://docs.crewai.com/en/installation)
-- Anthropic API key
+- OpenAI or Anthropic API key
 
 ### Installation
 
 ```bash
-# Install UV
 pip install uv
-
-# Install dependencies
 crewai install
 ```
 
 Create a `.env` file in the project root:
 
 ```bash
-ANTHROPIC_API_KEY=your_key_here
+OPENAI_API_KEY=your_key_here
+ANTHROPIC_API_KEY=your_key_here # alternative
+SERPER_API_KEY=your_key_here # optional
 ```
 
 ### Running
